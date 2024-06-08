@@ -6,7 +6,7 @@ namespace RateMyFit.Shared
     {
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
-        [Required, StringLength(100, MinimumLength = 5)]
+        [Required, StringLength(20, MinimumLength = 5)]
         public string Password { get; set; } = string.Empty;
         [Compare("Password", ErrorMessage = "The passwords do not match!")]
         public string ConfirmPassword { get; set; } = string.Empty;
