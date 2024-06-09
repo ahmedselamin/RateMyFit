@@ -1,6 +1,7 @@
 global using Microsoft.EntityFrameworkCore;
 global using RateMyFit.Server.Data;
 global using RateMyFit.Shared;
+using RateMyFit.Server.Services.AuthService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
 );
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
