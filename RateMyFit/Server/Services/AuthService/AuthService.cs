@@ -18,19 +18,19 @@ namespace RateMyFit.Server.Services.AuthService
                 return new ServiceResponse<int>
                 {
                     Success = false,
-                    Message = "User Already Exists!"
+                    Message = "User already exists."
                 };
-
-                CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-
             }
 
-            return new ServiceResponse<int> { Data = user.Id };
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<int> { Data = user.Id, Message = "Registration successful!" };
         }
 
         public async Task<bool> UserExists(string email)
